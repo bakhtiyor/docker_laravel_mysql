@@ -24,6 +24,10 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo_pgsql pgsql
 
+# Required if need manipulate images
+RUN docker-php-ext-configure exif \
+    && docker-php-ext-install exif
+    
 RUN docker-php-ext-install bcmath \
         calendar\
         fileinfo\
@@ -34,7 +38,8 @@ RUN docker-php-ext-install bcmath \
         xmlwriter\
         xsl\
         opcache\
-        zip
+        zip\
+        gd
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

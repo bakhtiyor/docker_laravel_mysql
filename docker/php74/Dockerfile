@@ -20,9 +20,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable imagick \
     && rm -r /var/lib/apt/lists/*
 
-# Install Postgre PDO
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo_pgsql pgsql
+# Install Mysql PDO
+RUN docker-php-ext-install mysqli && \
+    docker-php-ext-install pdo_mysql
 
 # Required if need manipulate images
 RUN docker-php-ext-configure exif \
